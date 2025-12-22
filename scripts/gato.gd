@@ -1,6 +1,8 @@
 class_name Gato
 extends CharacterBody2D
 
+@export var AudioPlayer : AudioStreamPlayer2D
+
 # Is true while player holds the finger down/is dragging the aim.
 var is_dragging := false
 var is_draggable : bool
@@ -24,6 +26,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	check_draggable_state()
+	
+	# Sound
+	if (!is_on_floor() and !AudioPlayer.playing):
+		AudioPlayer.play()
+	elif (is_on_floor()):
+		AudioPlayer.stop()
 	
 	# Gravity
 	if (!is_on_floor()):
