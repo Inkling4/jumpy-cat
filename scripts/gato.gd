@@ -5,6 +5,9 @@ extends CharacterBody2D
 var is_dragging := false
 var is_draggable : bool
 
+# Gravity modifier
+@export var gravity : float = 100
+
 var mouse_pos_start : Vector2
 var mouse_pos_current : Vector2
 # Position difference between drag start and current mouse pos
@@ -22,6 +25,11 @@ func _physics_process(delta: float) -> void:
 	
 	check_draggable_state()
 	
+	# Gravity
+	if (!is_on_floor()):
+		var _velocity = velocity
+		_velocity.y = _velocity.y + gravity * delta
+	
 	if (is_dragging):
 		mouse_pos_current = get_global_mouse_position()
 		drag_length = mouse_pos_start.distance_to(mouse_pos_current)
@@ -29,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		var _direction : Vector2
 		_direction.x = mouse_pos_current.x - mouse_pos_start.x * -1
 		_direction.y = mouse_pos_current.y - mouse_pos_start.y * -1
-		_direction /= drag_length
+		_direction = _direction / drag_length
 		# Applies direction
 		drag_direction = _direction
 
