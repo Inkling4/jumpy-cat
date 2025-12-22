@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://s4er21x1mdw3"]
+
+[ext_resource type="Script" uid="uid://dt37aqvc1ivu5" path="res://scripts/gato.gd" id="1_874ei"]
+
+[node name="Gato" type="CharacterBody2D"]
+script = ExtResource("1_874ei")
