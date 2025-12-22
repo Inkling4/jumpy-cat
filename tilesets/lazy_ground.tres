@@ -1,0 +1,22 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://blnwyt78un0h1"]
+
+[ext_resource type="Texture2D" uid="uid://dd6khp6bmlbp2" path="res://assets/sprites/Extremely_lazy_tiles.png" id="1_u7ckd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b5x6v"]
+texture = ExtResource("1_u7ckd")
+7:7/0 = 0
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+12:8/0 = 0
+8:8/0 = 0
+8:6/0 = 0
+8:5/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_b5x6v")
