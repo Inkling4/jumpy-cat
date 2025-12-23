@@ -394,5 +394,10 @@ scale = Vector2(0.495, 0.405)
 sprite_frames = SubResource("SpriteFrames_po5vs")
 frame_progress = 0.041392997
 
+[node name="RayCast2D" type="RayCast2D" parent="CollisionShape2D"]
+position = Vector2(0.5, 15.5)
+collide_with_areas = true
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 15.5)
 stream = ExtResource("2_0d640")

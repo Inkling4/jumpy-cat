@@ -9,6 +9,11 @@ var is_dragging := false
 var is_draggable : bool
 var has_double_jumped := false
 
+# Last safe spot the gato has been on.
+# Acts as the place you respawn when you fall.
+var respawn_point : Vector2
+# For ground detection/safety check
+@onready var ray_cast_2d: RayCast2D = $CollisionShape2D/RayCast2D
 
 # Gravity modifier
 @export var gravity : float = 1600
@@ -67,12 +72,45 @@ func _physics_process(delta: float) -> void:
 		_direction.y = _direction.y / drag_length
 		# Applies direction
 		drag_direction = _direction
-	move_and_slide()
 	
+	# Updates respawn point
+	if (is_on_floor() and is_floor_safe()):
+		respawn_point = position
+	
+	move_and_slide()
 	
 	if (is_on_floor()):
 		velocity.x = move_toward(velocity.x, 0, delta * friction)
 		has_double_jumped = false
+
+## Returns whether the current floor you're standing on is safe or not.
+## If midair, returns false.
+func is_floor_safe() -> bool:
+	if (!is_on_floor()):
+		# If in midair, of course the ground isn't safe, dummy.
+		return false
+	var _object_below : Object = ray_cast_2d.get_collider()
+	
+	if (!_object_below):
+		print ("Current ground is null.")
+		return false
+	
+	# If it's a tilemaplayer, the floor is safe :D
+	if (_object_below.is_in_group("SafeGround")):
+		# Ground safe!
+		return true
+	elif (_object_below.is_in_group("UnsafeGround")):
+		# Ground is not safe :C
+		return false
+	else:
+		print("Current floor not in group SafeGround or UnsafeGround. Defaults to Unsafe.")
+		return false
+
+
+func die() -> void:
+	print("You are dead. Not big surprise.")
+	position = respawn_point
+	pass
 
 func _input(event: InputEvent) -> void:
 	if (is_draggable):
