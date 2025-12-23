@@ -379,7 +379,7 @@ animations = [{
 }]
 
 [node name="Gato" type="CharacterBody2D" node_paths=PackedStringArray("AudioPlayer", "animated_sprite_2d")]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 script = ExtResource("1_874ei")
 AudioPlayer = NodePath("AudioStreamPlayer2D")
 animated_sprite_2d = NodePath("CollisionShape2D/AnimatedSprite2D")

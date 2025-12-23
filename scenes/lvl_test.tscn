@@ -18,8 +18,7 @@ tile_set = ExtResource("1_imya8")
 
 [node name="Gato" parent="." instance=ExtResource("2_b5x6v")]
 position = Vector2(116, -165)
-gravity = 1600.0
 
 [node name="Camera2D" type="Camera2D" parent="Gato"]
 position = Vector2(0, 1)
-zoom = Vector2(0.315, 0.315)
+zoom = Vector2(0.5, 0.5)

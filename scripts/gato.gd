@@ -7,12 +7,13 @@ extends CharacterBody2D
 # Is true while player holds the finger down/is dragging the aim.
 var is_dragging := false
 var is_draggable : bool
+var has_double_jumped := false
 
 
 # Gravity modifier
 @export var gravity : float = 1600
-@export var x_max_drag_distace : float = 1600.0
-@export var y_max_drag_distace : float = 1600.0
+@export var x_max_drag_distace : float = 1200.0
+@export var y_max_drag_distace : float = 1200.0
 @export var x_max_launch_speed : float = 600.0
 @export var y_max_launch_speed : float = 850.0
 @export var min_drag_length : float = 100.0
@@ -49,7 +50,10 @@ func _physics_process(delta: float) -> void:
 	# Gravity
 	if (!is_on_floor()):
 		var _velocity = velocity
-		_velocity.y = _velocity.y + gravity * delta
+		var _gravity = gravity
+		if ( has_double_jumped):
+			_gravity *= 2
+		_velocity.y = _velocity.y + (_gravity) * delta
 		velocity = _velocity
 	
 	if (is_dragging):
@@ -68,6 +72,7 @@ func _physics_process(delta: float) -> void:
 	
 	if (is_on_floor()):
 		velocity.x = move_toward(velocity.x, 0, delta * friction)
+		has_double_jumped = false
 
 func _input(event: InputEvent) -> void:
 	if (is_draggable):
@@ -87,11 +92,20 @@ func _input(event: InputEvent) -> void:
 			drag_direction.y = 0
 			mouse_pos_start.x = 0
 			mouse_pos_start.y = 0
+	elif !is_on_floor():
+		if (event.is_action_pressed("player_drag") and !has_double_jumped):
+			double_jump()
+
+func double_jump():
+	var _velocity = velocity
+	_velocity.y = -5000
+	velocity = _velocity
+	has_double_jumped = true
 
 func launch() -> void:
 	var _velocity = velocity
 	
-	## Applies ratio between min and max drag distance, then maps the ratio to the curve.
+	## Applies ratio between min and max drag distance, then applies the ratio to the curve.
 	var _drag_distance_multiplier_x = clamp(drag_length, 0, x_max_drag_distace) / x_max_drag_distace
 	var _drag_distance_multiplier_y = clamp(drag_length, 0, y_max_drag_distace) / y_max_drag_distace
 	_drag_distance_multiplier_x = drag_distance_multiplier_curve.sample(_drag_distance_multiplier_x)
