@@ -77,7 +77,20 @@ func _physics_process(delta: float) -> void:
 	if (is_on_floor() and is_floor_safe()):
 		respawn_point = position
 	
+
+	
 	move_and_slide()
+	
+		# Check if on unsafe floor that is tilemaplayer
+	if (is_on_floor() and !is_floor_safe() and ray_cast_2d.get_collider() is TileMapLayer):
+		var _floor : TileMapLayer = ray_cast_2d.get_collider()
+		var _child_of_tile_map_layer = _floor.get_child(0)
+		# If it's a moving platform, move based on its delta_pos
+		# This effectively makes it stand "on" the platform
+		if (_child_of_tile_map_layer is MovingPlatform):
+			var _moving_platform : MovingPlatform = _child_of_tile_map_layer
+			position.x += _moving_platform.delta_pos.x
+			position.y += _moving_platform.delta_pos.y
 	
 	if (is_on_floor()):
 		velocity.x = move_toward(velocity.x, 0, delta * friction)
@@ -109,8 +122,14 @@ func is_floor_safe() -> bool:
 
 func die() -> void:
 	print("You are dead. Not big surprise.")
+	respawn()
+
+
+
+
+func respawn() -> void:
+	velocity.x = 0
 	position = respawn_point
-	pass
 
 func _input(event: InputEvent) -> void:
 	if (is_draggable):

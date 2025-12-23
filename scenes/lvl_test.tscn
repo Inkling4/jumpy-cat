@@ -35,12 +35,13 @@ position = Vector2(-299.7527, -29.435184)
 rotates = false
 loop = false
 
-[node name="MovingPlatform" parent="TileMapLayers/MovingPlatform0/PathFollow2D" node_paths=PackedStringArray("path_follow_2d") instance=ExtResource("2_ir0v0")]
-path_follow_2d = NodePath("..")
-
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayers/MovingPlatform0/PathFollow2D" groups=["UnsafeGround"]]
 tile_map_data = PackedByteArray("AAD+/wAAAAAHAAcAAAD//wAAAAAHAAcAAAAAAAAAAAAHAAcAAAABAAAAAAAHAAcAAAA=")
 tile_set = ExtResource("1_imya8")
+
+[node name="MovingPlatform" parent="TileMapLayers/MovingPlatform0/PathFollow2D/TileMapLayer" node_paths=PackedStringArray("path_follow_2d") instance=ExtResource("2_ir0v0")]
+scale = Vector2(1, 0.99999994)
+path_follow_2d = NodePath("../..")
 
 [node name="Gato" parent="." instance=ExtResource("2_b5x6v")]
 position = Vector2(116, -165)
