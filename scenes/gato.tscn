@@ -1,8 +1,9 @@
-[gd_scene load_steps=57 format=3 uid="uid://s4er21x1mdw3"]
+[gd_scene load_steps=58 format=3 uid="uid://s4er21x1mdw3"]
 
 [ext_resource type="Script" uid="uid://dt37aqvc1ivu5" path="res://scripts/gato.gd" id="1_874ei"]
 [ext_resource type="AudioStream" uid="uid://diof5crq4yo0y" path="res://assets/sound/cat-spin-sound .mp3" id="2_0d640"]
 [ext_resource type="Texture2D" uid="uid://cx5cdt2v2ghhe" path="res://assets/sprites/gato.png" id="2_85aii"]
+[ext_resource type="Curve" uid="uid://dbok2nie3jl80" path="res://resources/curves/gato_launch_curve.tres" id="2_djawk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85aii"]
 radius = 50.0
@@ -382,8 +383,7 @@ scale = Vector2(2, 2)
 script = ExtResource("1_874ei")
 AudioPlayer = NodePath("AudioStreamPlayer2D")
 animated_sprite_2d = NodePath("CollisionShape2D/AnimatedSprite2D")
-gravity = 600.0
-friction = 6000.0
+drag_distance_multiplier_curve = ExtResource("2_djawk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_85aii")

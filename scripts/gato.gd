@@ -10,12 +10,13 @@ var is_draggable : bool
 
 
 # Gravity modifier
-@export var gravity : float
-@export var x_max_drag_distace : float
-@export var y_max_drag_distace : float
-@export var x_max_launch_speed : float
-@export var y_max_launch_speed : float
-@export var friction : float
+@export var gravity : float = 1600
+@export var x_max_drag_distace : float = 1600.0
+@export var y_max_drag_distace : float = 1600.0
+@export var x_max_launch_speed : float = 600.0
+@export var y_max_launch_speed : float = 850.0
+@export var min_drag_length : float = 100.0
+@export var friction : float = 7000.0
 @export var movement_scale : float = 6
 @export var drag_distance_multiplier_curve : Curve
 
@@ -78,7 +79,7 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_released("player_drag")):
 			is_dragging = false
 			
-			if (is_draggable and drag_length >= 50):
+			if (is_draggable and drag_length >= min_drag_length):
 				launch()
 			# After launch, sets values to default
 			drag_length = 0
