@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=4 uid="uid://pius6sdxkutk"]
+[gd_scene load_steps=4 format=4 uid="uid://pius6sdxkutk"]
 
 [ext_resource type="TileSet" uid="uid://blnwyt78un0h1" path="res://tilesets/lazy_ground.tres" id="1_imya8"]
 [ext_resource type="PackedScene" uid="uid://s4er21x1mdw3" path="res://scenes/gato.tscn" id="2_b5x6v"]
+
+[sub_resource type="Curve" id="Curve_b5x6v"]
+_data = [Vector2(0, 0), 0.0, 2.0224721, 0, 1, Vector2(0.25, 0.50561804), 2.0224721, 0.7072736, 1, 0, Vector2(1, 1), 0.6705131, 0.0, 0, 0]
+point_count = 3
 
 [node name="Test" type="Node2D"]
 
@@ -18,8 +22,13 @@ tile_set = ExtResource("1_imya8")
 
 [node name="Gato" parent="." instance=ExtResource("2_b5x6v")]
 position = Vector2(116, -165)
-gravity = 2200.0
-x_launch_speed_limit = 800.0
+gravity = 1600.0
+x_max_drag_distace = 1000.0
+y_max_drag_distace = 1000.0
+x_max_launch_speed = 600.0
+y_max_launch_speed = 850.0
+friction = 7000.0
+drag_distance_multiplier_curve = SubResource("Curve_b5x6v")
 
 [node name="Camera2D" type="Camera2D" parent="Gato"]
 position = Vector2(0, 1)

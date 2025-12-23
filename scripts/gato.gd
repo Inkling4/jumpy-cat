@@ -11,12 +11,14 @@ var is_draggable : bool
 
 # Gravity modifier
 @export var gravity : float
-@export var x_launch_speed_limit : float
-@export var y_launch_speed_limit : float
-@export var x_speed_multiplier : float
-@export var y_speed_multiplier : float
+@export var x_max_drag_distace : float
+@export var y_max_drag_distace : float
+@export var x_max_launch_speed : float
+@export var y_max_launch_speed : float
 @export var friction : float
 @export var movement_scale : float = 6
+@export var drag_distance_multiplier_curve : Curve
+
 
 var mouse_pos_start : Vector2
 var mouse_pos_current : Vector2
@@ -87,8 +89,15 @@ func _input(event: InputEvent) -> void:
 
 func launch() -> void:
 	var _velocity = velocity
-	_velocity.x = clamp(drag_length, 0, x_launch_speed_limit) * drag_direction.x
-	_velocity.y = clamp(drag_length, 0, y_launch_speed_limit) * drag_direction.y
+	
+	var _drag_distance_multiplier_x = clamp(drag_length, 0, x_max_drag_distace) / x_max_drag_distace
+	var _drag_distance_multiplier_y = clamp(drag_length, 0, y_max_drag_distace) / y_max_drag_distace
+	_drag_distance_multiplier_x = drag_distance_multiplier_curve.sample(_drag_distance_multiplier_x)
+	_drag_distance_multiplier_y = drag_distance_multiplier_curve.sample(_drag_distance_multiplier_y)
+	print(_drag_distance_multiplier_y)
+	
+	_velocity.x = (x_max_launch_speed * _drag_distance_multiplier_x) * drag_direction.x
+	_velocity.y = (y_max_launch_speed * _drag_distance_multiplier_y) * drag_direction.y
 	velocity = _velocity * movement_scale
 
 func check_draggable_state() -> void:

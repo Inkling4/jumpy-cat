@@ -382,8 +382,6 @@ script = ExtResource("1_874ei")
 AudioPlayer = NodePath("AudioStreamPlayer2D")
 animated_sprite_2d = NodePath("CollisionShape2D/AnimatedSprite2D")
 gravity = 600.0
-y_launch_speed_limit = 800.0
-x_launch_speed_limit = 400.0
 friction = 6000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
