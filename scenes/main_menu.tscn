@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2tbn7renk7hr"]
+[gd_scene load_steps=6 format=3 uid="uid://b2tbn7renk7hr"]
 
 [ext_resource type="Script" uid="uid://dkr5hhqhilvrt" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://8q7iet006lex" path="res://assets/sprites/play_neutral.png" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://cqusuadgewc2i" path="res://assets/sprites/play_pressed.png" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://pius6sdxkutk" path="res://scenes/lvl_test.tscn" id="2_wu84c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt6"]
 size = Vector2(279.775, 279)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_bqqt6")
+default_level = ExtResource("2_wu84c")
 
 [node name="PlayButton" type="TouchScreenButton" parent="."]
 position = Vector2(-253, -255)

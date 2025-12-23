@@ -1,6 +1,6 @@
 extends Node2D
 
-var test_level = preload("res://scenes/lvl_test.tscn")
+@export var default_level : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,4 +8,4 @@ func _ready() -> void:
 
 
 func _on_play_button_released() -> void:
-	get_tree().change_scene_to_packed(test_level)
+	get_tree().change_scene_to_packed(default_level)
