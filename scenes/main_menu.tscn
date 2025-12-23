@@ -10,7 +10,7 @@ size = Vector2(279.775, 279)
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_bqqt6")
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+[node name="PlayButton" type="TouchScreenButton" parent="."]
 position = Vector2(-253, -255)
 scale = Vector2(1.8741629, 1.762885)
 texture_normal = ExtResource("1_ekxnf")
@@ -19,4 +19,4 @@ shape = SubResource("RectangleShape2D_bqqt6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[connection signal="released" from="TouchScreenButton" to="." method="_on_play_button_released"]
+[connection signal="released" from="PlayButton" to="." method="_on_play_button_released"]

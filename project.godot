@@ -24,6 +24,11 @@ window/size/viewport_height=1080
 
 project/assembly_name="JumpyCat"
 
+[global_group]
+
+SafeGround="Floor in this group is safe to respawn on."
+UnsafeGround="Floors in this group cannot be respawned on"
+
 [input]
 
 player_drag={
