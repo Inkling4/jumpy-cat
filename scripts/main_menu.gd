@@ -5,4 +5,5 @@ extends Node2D
 
 
 func _on_play_button_released() -> void:
-	get_tree().change_scene_to_packed(default_level)
+	if (default_level):
+		get_tree().change_scene_to_packed(default_level)
