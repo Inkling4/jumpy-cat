@@ -78,7 +78,7 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_released("player_drag")):
 			is_dragging = false
 			
-			if (is_draggable):
+			if (is_draggable and drag_length >= 50):
 				launch()
 			# After launch, sets values to default
 			drag_length = 0
@@ -90,10 +90,12 @@ func _input(event: InputEvent) -> void:
 func launch() -> void:
 	var _velocity = velocity
 	
+	## Applies ratio between min and max drag distance, then maps the ratio to the curve.
 	var _drag_distance_multiplier_x = clamp(drag_length, 0, x_max_drag_distace) / x_max_drag_distace
 	var _drag_distance_multiplier_y = clamp(drag_length, 0, y_max_drag_distace) / y_max_drag_distace
 	_drag_distance_multiplier_x = drag_distance_multiplier_curve.sample(_drag_distance_multiplier_x)
 	_drag_distance_multiplier_y = drag_distance_multiplier_curve.sample(_drag_distance_multiplier_y)
+	
 	print(_drag_distance_multiplier_y)
 	
 	_velocity.x = (x_max_launch_speed * _drag_distance_multiplier_x) * drag_direction.x
