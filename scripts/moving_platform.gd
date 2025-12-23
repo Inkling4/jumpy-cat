@@ -1,3 +1,4 @@
+class_name MovingPlatform
 extends Node2D
 
 @export var path_follow_2d : PathFollow2D
@@ -5,6 +6,9 @@ extends Node2D
 @export var platform_speed : float = 200
 
 @export var forward : bool = true
+
+# The change in position since last frame
+var delta_pos : Vector2
 
 var length : float
 
@@ -19,6 +23,9 @@ func _ready() -> void:
 		print("Moving Platform _ready failed! (null reference)")
 
 func _physics_process(delta: float) -> void:
+	
+	var _previous_pos = global_position
+	
 	if (path_follow_2d):
 		var _current_progress : float = path_follow_2d.progress
 		# Moves
@@ -37,5 +44,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				path_follow_2d.progress = _current_progress
 		
-		print ("Platform progress: ", path_follow_2d.progress)
+		delta_pos = global_position - _previous_pos
+		# print ("Platform progress: ", path_follow_2d.progress)
 	
