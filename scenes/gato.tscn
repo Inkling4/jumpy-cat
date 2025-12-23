@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://diof5crq4yo0y" path="res://assets/sound/cat-spin-sound .mp3" id="2_0d640"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85aii"]
-radius = 50.0
+radius = 92.00543
 
 [node name="Gato" type="CharacterBody2D" node_paths=PackedStringArray("AudioPlayer")]
 script = ExtResource("1_874ei")
@@ -14,10 +14,10 @@ y_launch_speed_limit = 800.0
 x_launch_speed_limit = 400.0
 friction = 6000.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_85aii")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_0d640")

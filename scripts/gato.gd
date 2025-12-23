@@ -10,9 +10,12 @@ var is_draggable : bool
 
 # Gravity modifier
 @export var gravity : float
-@export var y_launch_speed_limit : float
 @export var x_launch_speed_limit : float
+@export var y_launch_speed_limit : float
+@export var x_speed_multiplier : float
+@export var y_speed_multiplier : float
 @export var friction : float
+@export var movement_scale : float = 6
 
 var mouse_pos_start : Vector2
 var mouse_pos_current : Vector2
@@ -24,7 +27,8 @@ var drag_direction : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	gravity *= movement_scale
+	friction *= movement_scale
 
 
 func _physics_process(delta: float) -> void:
@@ -45,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	if (is_dragging):
 		mouse_pos_current = get_global_mouse_position()
 		drag_length = mouse_pos_start.distance_to(mouse_pos_current)
-		
+		print(drag_length)
 		var _direction : Vector2
 		_direction.x = (mouse_pos_current.x - mouse_pos_start.x) * -1
 		_direction.y = (mouse_pos_current.y - mouse_pos_start.y) * -1
@@ -65,7 +69,7 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_pressed("player_drag")):
 			is_dragging = true
 			mouse_pos_start = get_global_mouse_position()
-		
+			
 		if (event.is_action_released("player_drag")):
 			is_dragging = false
 			
@@ -82,7 +86,7 @@ func launch() -> void:
 	var _velocity = velocity
 	_velocity.x = clamp(drag_length, 0, x_launch_speed_limit) * drag_direction.x
 	_velocity.y = clamp(drag_length, 0, y_launch_speed_limit) * drag_direction.y
-	velocity = _velocity
+	velocity = _velocity * movement_scale
 
 func check_draggable_state() -> void:
 	if (is_on_floor()):
