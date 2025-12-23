@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		# Moves
 		if (forward):
 			_current_progress += platform_speed * delta
-			if (_current_progress > length):
+			if (_current_progress >= length):
 				path_follow_2d.progress = length
 				forward = false
 			else:
