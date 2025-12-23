@@ -2,6 +2,7 @@ class_name Gato
 extends CharacterBody2D
 
 @export var AudioPlayer : AudioStreamPlayer2D
+@export var animated_sprite_2d: AnimatedSprite2D
 
 # Is true while player holds the finger down/is dragging the aim.
 var is_dragging := false
@@ -37,8 +38,10 @@ func _physics_process(delta: float) -> void:
 	# Sound
 	if (!is_on_floor() and !AudioPlayer.playing):
 		AudioPlayer.play()
+		animated_sprite_2d.play("spin")
 	elif (is_on_floor()):
 		AudioPlayer.stop()
+		animated_sprite_2d.play("default")
 	
 	# Gravity
 	if (!is_on_floor()):
