@@ -7,9 +7,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_ir0v0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -299.7527, -29.435184, 0, 0, 0, 0, -194.92688, 283.96295)
+"points": PackedVector2Array(0, 0, 0, 0, -343.39996, -32.80002, 0, 0, 0, 0, -259.59998, 132.99998, 0, 0, 0, 0, -204, 259.39996)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xpfil"]
 
@@ -23,11 +23,11 @@ tile_map_data = PackedByteArray("AAD8/wAAAAAIAAcAAAD9/wAAAAAIAAcAAAD+/wAAAAAIAAc
 tile_set = ExtResource("1_imya8")
 
 [node name="MovingPlatform0" type="Path2D" parent="TileMapLayers"]
-scale = Vector2(1.7114109, 0.5775401)
+position = Vector2(-178.8, -270)
 curve = SubResource("Curve2D_ir0v0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="TileMapLayers/MovingPlatform0"]
-position = Vector2(-299.7527, -29.435184)
+position = Vector2(-343.39996, -32.80002)
 rotates = false
 loop = false
 
@@ -40,7 +40,7 @@ scale = Vector2(1, 0.99999994)
 path_follow_2d = NodePath("../..")
 
 [node name="Gato" parent="." instance=ExtResource("2_b5x6v")]
-position = Vector2(116, -165)
+position = Vector2(128, -165)
 
 [node name="Camera2D" type="Camera2D" parent="Gato"]
 position = Vector2(0, 1)

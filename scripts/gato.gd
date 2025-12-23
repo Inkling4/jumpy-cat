@@ -12,6 +12,9 @@ var has_double_jumped := false
 # Last safe spot the gato has been on.
 # Acts as the place you respawn when you fall.
 var respawn_point : Vector2
+
+var platform_velocity_boost : Vector2 
+
 # For ground detection/safety check
 @onready var ray_cast_2d: RayCast2D = $CollisionShape2D/RayCast2D
 
@@ -91,6 +94,13 @@ func _physics_process(delta: float) -> void:
 			var _moving_platform : MovingPlatform = _child_of_tile_map_layer
 			position.x += _moving_platform.delta_pos.x
 			position.y += _moving_platform.delta_pos.y
+			platform_velocity_boost = _moving_platform.delta_pos
+		else:
+			platform_velocity_boost.x = 0
+			platform_velocity_boost.y = 0
+	else:
+		platform_velocity_boost.x = 0
+		platform_velocity_boost.y = 0
 	
 	if (is_on_floor()):
 		velocity.x = move_toward(velocity.x, 0, delta * friction)
@@ -172,7 +182,7 @@ func launch() -> void:
 	
 	_velocity.x = (x_max_launch_speed * _drag_distance_multiplier_x) * drag_direction.x
 	_velocity.y = (y_max_launch_speed * _drag_distance_multiplier_y) * drag_direction.y
-	velocity = _velocity * movement_scale
+	velocity = _velocity * movement_scale + platform_velocity_boost
 
 func check_draggable_state() -> void:
 	if (is_on_floor()):
