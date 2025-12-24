@@ -146,13 +146,13 @@ text = "Drag and release to jump"
 
 [node name="Label2" type="Label" parent="Graphic"]
 z_index = -1
-offset_left = 3273.0
-offset_top = -2549.0
-offset_right = 4602.0
-offset_bottom = -1885.0
+offset_left = 3309.0
+offset_top = -2830.0
+offset_right = 4638.0
+offset_bottom = -2166.0
 theme_override_colors/font_color = Color(0.06999999, 0.41100013, 1, 1)
 theme_override_font_sizes/font_size = 80
-text = "Tap mid air to double jump"
+text = "Tap midair to double jump"
 
 [node name="Label3" type="Label" parent="Graphic"]
 z_index = -1
@@ -166,6 +166,7 @@ text = "You won! :3"
 
 [node name="LaunchLine" type="Line2D" parent="Graphic"]
 position = Vector2(-7.6293945e-06, 0)
+antialiased = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2
