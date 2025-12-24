@@ -159,7 +159,7 @@ func _input(event: InputEvent) -> void:
 			launch_line.add_point(get_global_mouse_position())
 		if (event.is_action_released("player_drag")):
 			is_dragging = false
-			
+			launch_line.clear_points()
 			if (is_draggable and drag_length >= min_drag_length):
 				launch()
 			# After launch, sets values to default
@@ -179,7 +179,6 @@ func double_jump():
 	has_double_jumped = true
 
 func launch() -> void:
-	launch_line.clear_points()
 	var _velocity = velocity
 	
 	## Applies ratio between min and max drag distance, then applies the ratio to the curve.
@@ -204,5 +203,7 @@ func apply_line_behavior():
 	launch_line.set_point_position(1, mouse_pos_current)
 	if drag_length > x_max_drag_distace:
 		launch_line.self_modulate = Color(1, 0, 0)
+	elif drag_length < min_drag_length:
+		launch_line.self_modulate = Color(0, 0, 0)
 	else:
 		launch_line.self_modulate = Color(1, 1, 1)
