@@ -3,7 +3,9 @@ extends CharacterBody2D
 
 @export var AudioPlayer : AudioStreamPlayer2D
 @export var animated_sprite_2d: AnimatedSprite2D
-
+@export var launch_line: Line2D
+var point1
+var point2
 # Is true while player holds the finger down/is dragging the aim.
 var is_dragging := false
 var is_draggable : bool
@@ -19,14 +21,16 @@ var platform_velocity_boost : Vector2
 @onready var ray_cast_2d: RayCast2D = $CollisionShape2D/RayCast2D
 
 # Gravity modifier
+@export_category("Movement values")
 @export var gravity : float = 1600
+@export var doublejump_height : float = -5000.0
 @export var x_max_drag_distace : float = 1200.0
 @export var y_max_drag_distace : float = 1200.0
 @export var x_max_launch_speed : float = 600.0
 @export var y_max_launch_speed : float = 850.0
 @export var min_drag_length : float = 100.0
-@export var friction : float = 7000.0
-@export var movement_scale : float = 6
+@export var friction : float = 8000.0
+@export var movement_scale : float = 6.0
 @export var drag_distance_multiplier_curve : Curve
 
 
@@ -67,7 +71,11 @@ func _physics_process(delta: float) -> void:
 	if (is_dragging):
 		mouse_pos_current = get_global_mouse_position()
 		drag_length = mouse_pos_start.distance_to(mouse_pos_current)
+		
 		print(drag_length)
+		
+		apply_line_behavior()
+		
 		var _direction : Vector2
 		_direction.x = (mouse_pos_current.x - mouse_pos_start.x) * -1
 		_direction.y = (mouse_pos_current.y - mouse_pos_start.y) * -1
@@ -147,7 +155,8 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_pressed("player_drag")):
 			is_dragging = true
 			mouse_pos_start = get_global_mouse_position()
-			
+			launch_line.add_point(get_global_mouse_position())
+			launch_line.add_point(get_global_mouse_position())
 		if (event.is_action_released("player_drag")):
 			is_dragging = false
 			
@@ -165,11 +174,12 @@ func _input(event: InputEvent) -> void:
 
 func double_jump():
 	var _velocity = velocity
-	_velocity.y = -5000
+	_velocity.y = doublejump_height
 	velocity = _velocity
 	has_double_jumped = true
 
 func launch() -> void:
+	launch_line.clear_points()
 	var _velocity = velocity
 	
 	## Applies ratio between min and max drag distance, then applies the ratio to the curve.
@@ -189,3 +199,10 @@ func check_draggable_state() -> void:
 		is_draggable = true
 	else:
 		is_draggable = false
+
+func apply_line_behavior():
+	launch_line.set_point_position(1, mouse_pos_current)
+	if drag_length > x_max_drag_distace:
+		launch_line.self_modulate = Color(1, 0, 0)
+	else:
+		launch_line.self_modulate = Color(1, 1, 1)
