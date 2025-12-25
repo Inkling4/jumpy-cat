@@ -146,10 +146,10 @@ text = "Drag and release to jump"
 
 [node name="Label2" type="Label" parent="Graphic"]
 z_index = -1
-offset_left = 3309.0
-offset_top = -2830.0
-offset_right = 4638.0
-offset_bottom = -2166.0
+offset_left = 3492.0
+offset_top = -2210.0
+offset_right = 4821.0
+offset_bottom = -1546.0
 theme_override_colors/font_color = Color(0.06999999, 0.41100013, 1, 1)
 theme_override_font_sizes/font_size = 80
 text = "Tap midair to double jump"
@@ -170,6 +170,6 @@ antialiased = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(16799, -9796.001)
+position = Vector2(16795, -9697)
 scale = Vector2(16.500927, 12.190742)
 texture = ExtResource("5_53anu")
