@@ -146,10 +146,10 @@ text = "Drag and release to jump"
 
 [node name="Label2" type="Label" parent="Graphic"]
 z_index = -1
-offset_left = 3492.0
-offset_top = -2210.0
-offset_right = 4821.0
-offset_bottom = -1546.0
+offset_left = 3486.0
+offset_top = -2454.0
+offset_right = 4815.0
+offset_bottom = -1790.0
 theme_override_colors/font_color = Color(0.06999999, 0.41100013, 1, 1)
 theme_override_font_sizes/font_size = 80
 text = "Tap midair to double jump"
