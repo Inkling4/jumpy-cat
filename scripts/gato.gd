@@ -24,8 +24,8 @@ var platform_velocity_boost : Vector2
 @export_category("Movement values")
 @export var gravity : float = 1600
 @export var doublejump_height : float = -5000.0
-@export var x_max_drag_distace : float = 800.0
-@export var y_max_drag_distace : float = 800.0
+@export var x_max_drag_distace : float = 1000.0
+@export var y_max_drag_distace : float = 1000.0
 @export var x_max_launch_speed : float = 600.0
 @export var y_max_launch_speed : float = 850.0
 @export var min_drag_length : float = 100.0
