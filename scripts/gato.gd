@@ -101,7 +101,9 @@ func _physics_process(delta: float) -> void:
 			var _moving_platform : MovingPlatform = _child_of_tile_map_layer
 			position.x += _moving_platform.delta_pos.x
 			position.y += _moving_platform.delta_pos.y
-			platform_velocity_boost = _moving_platform.delta_pos
+			
+			# Platform velocity should be changed as property the platform scene can toggle on/off 
+			platform_velocity_boost = _moving_platform.delta_pos / delta
 		else:
 			platform_velocity_boost.x = 0
 			platform_velocity_boost.y = 0
