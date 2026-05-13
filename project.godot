@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="JumpyCat"
-run/main_scene="uid://b2tbn7renk7hr"
+run/main_scene="uid://5qepb6l2rnp2"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
